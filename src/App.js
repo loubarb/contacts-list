@@ -3,27 +3,25 @@ import "./styles.css";
 import { useState } from "react";
 
 const App = () => {
+  const contacts = [
+    { name: "Jenny Han", email: "jenny.han@notreal.com", age: 25 },
+    { name: "Jason Long", email: "jason.long@notreal.com", age: 45 },
+    { name: "Peter Pan", email: "peter.pan@neverland.com", age: 100 }
+  ];
+
   return(
     <div>
-      <ContactCard
-        avatar="https://via.placeholder.com/150"
-        name="Jenny Han"
-        email="jenny.han@notreal.com"
-        age={25} />
-      <ContactCard
-        avatar="https://via.placeholder.com/150"
-        name="Jason Long"
-        email="jason.long@notreal.com"
-        age={45} />
-      <ContactCard
-        avatar="https://via.placeholder.com/150"
-        name="Peter Pan"
-        email="peter.pan@neverland.com"
-        age={100} />
+      {contacts.map(contact => (
+        <ContactCard
+          avatar="https://via.placeholder.com/150"
+          name={contact.name}
+          email={contact.email}
+          age={contact.age} 
+        />
+      ))}
     </div>
-
   );
-}
+  };
 
 const ContactCard = props => {
   console.log(props.avatar);
