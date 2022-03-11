@@ -3,37 +3,40 @@ import "./styles.css";
 import { useState } from "react";
 
 const App = () => {
-  const contacts = [
-    { name: "Jenny Han", email: "jenny.han@notreal.com", age: 25 },
-    { name: "Jason Long", email: "jason.long@notreal.com", age: 45 },
-    { name: "Peter Pan", email: "peter.pan@neverland.com", age: 100 }
-  ];
+  const [contacts, setContacts] = useState([]);
+
+  fetch("https://randomuser.me/api/?results=3")
+    .then(response => response.json())
+    .then(data => {
+      console.log(data);
+      setContacts(data.results);
+    });
 
   return(
     <div>
       {contacts.map(contact => (
         <ContactCard
-          avatar="https://via.placeholder.com/150"
-          name={contact.name}
+          picture={contact.picture.large}
+          name={contact.name.first + " " + contact.name.last}
           email={contact.email}
-          age={contact.age} 
+          age={contact.dob.age} 
         />
       ))}
     </div>
   );
-  };
+};
 
 const ContactCard = props => {
-  console.log(props.avatar);
-  console.log(props.name);
-  console.log(props.email);
-  console.log(props.age);
+  // console.log(props.picture);
+  // console.log(props.name);
+  // console.log(props.email);
+  // console.log(props.age);
 
   const [showAge, setShowAge] = useState(false);
 
   return (
     <div className="contact-card">
-      <img src="{props.avatar}" alt="profile" />
+      <img src={props.picture} alt="profile" />
       <div className="user-details">
         <p>Name: {props.name}</p>
         <p>Email: {props.email}</p>
