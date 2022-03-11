@@ -1,16 +1,17 @@
 import React from "react";
 import "./styles.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const App = () => {
   const [contacts, setContacts] = useState([]);
 
+  useEffect(() => {
   fetch("https://randomuser.me/api/?results=3")
     .then(response => response.json())
     .then(data => {
-      console.log(data);
       setContacts(data.results);
     });
+  }, []);
 
   return(
     <div>
